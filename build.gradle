@@ -1,0 +1,17 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.1'
+}
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.rorhcdream.springboot'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
