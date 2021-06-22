@@ -2,12 +2,16 @@ package com.rorhcdream.springboot.service.post;
 
 import com.rorhcdream.springboot.domain.post.Post;
 import com.rorhcdream.springboot.domain.post.PostRepository;
+import com.rorhcdream.springboot.web.dto.post.PostListResponseDto;
 import com.rorhcdream.springboot.web.dto.post.PostResponseDto;
 import com.rorhcdream.springboot.web.dto.post.PostSaveRequestDto;
 import com.rorhcdream.springboot.web.dto.post.PostUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -35,5 +39,12 @@ public class PostService {
     @Transactional
     public Long save(PostSaveRequestDto requestDto) {
         return postRepository.save(requestDto.toEntity()).getId();
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostListResponseDto> findAllDesc() {
+        return postRepository.findAllDesc().stream()
+                .map(PostListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
