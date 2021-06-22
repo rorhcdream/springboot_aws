@@ -26,4 +26,10 @@ public class PostApiController {
     public long save(@RequestBody PostSaveRequestDto requestDto) {
         return postService.save(requestDto);
     }
+
+    @DeleteMapping("/api/v1/post/{id}")
+    public Long delete(@PathVariable Long id) {
+        postService.delete(id);
+        return id;
+    }
 }
