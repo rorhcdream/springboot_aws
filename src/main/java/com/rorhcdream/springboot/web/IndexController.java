@@ -1,5 +1,6 @@
 package com.rorhcdream.springboot.web;
 
+import com.rorhcdream.springboot.config.auth.LoginUser;
 import com.rorhcdream.springboot.config.auth.dto.SessionUser;
 import com.rorhcdream.springboot.service.post.PostService;
 import com.rorhcdream.springboot.web.dto.post.PostResponseDto;
@@ -18,10 +19,9 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("post", postService.findAllDesc());
 
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
